@@ -1,45 +1,85 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace ConsoleApp1
+
+namespace Animalclinic
 {
-    class cat
+    class Cat
     {
-        public int age { set; get; }
-        public string name { set; get; }
-        public string color { set; get; }
+        public string name;
+        public string color;
+        public int age;
+     
 
     }
-
-
     class Program
     {
+        public static int UsedSpace { get; private set; }
+        public static int FreeSpace { get; private set; }
+
         static void Main(string[] args)
-
         {
-            int freespace = 9;  
-            do
+            
+        Console.WriteLine
+                ($"Въведете информация за котката като започнете с Име, Цвят,Възраст. За раделител ползвате интервал.  ");
+            
+            
+            
+            List<string> Catinfo = Console.ReadLine().Split(' ').ToList();            
+            List<Cat> AnimalClinic = new List<Cat>();
+            FreeSpace = 9;
+            UsedSpace++;
+            FreeSpace--;
+            Console.Clear();
+            Console.WriteLine($"Свободните места са:{FreeSpace}. Ако желаете иформация за котките напишете: \"Info\"");
+            while (Catinfo[0] !="Info"||FreeSpace>9)
+                                      
             {
-                Console.WriteLine("Разполагате с {0} свободни места.", freespace); 
+                
+                Console.WriteLine($"Въведете информация за котката като започнете с Име, Цвят,Възраст. За раделите ползвате интервал.");
+                
+                Cat NastoqshotoCat = new Cat();
+                NastoqshotoCat.name = Catinfo[0];
+                
+                NastoqshotoCat.color = Catinfo[1];
+                NastoqshotoCat.age = int.Parse(Catinfo[2]);
+                AnimalClinic.Add(NastoqshotoCat);  //добавя котка към клиниката 
+                
+                Catinfo = Console.ReadLine().Split(' ').ToList();
+                Console.Clear();
+                UsedSpace++;
+                FreeSpace--;
+                Console.WriteLine($"Свободните места са:{FreeSpace}.  " +
+                    $" Ако желаете иформация за котките напишете: \"Info\"");
 
-                if (freespace > 0)
-
+                if (UsedSpace >=9)
                 {
-
-                    Console.WriteLine("Въведете информация за ново животно. ");
-                    freespace--;
+                   
+                    Console.WriteLine("Не разполагате с повече място !!!");
                 }
-                cat cat1 = new cat();  
-                Console.WriteLine("Моля въведете име на котката: ");
-                cat1.name = Console.ReadLine();  
-                Console.WriteLine("Моля въведете възраст на котката:  ");
-                cat1.age = int.Parse(Console.ReadLine()); 
-                Console.WriteLine("Моля въведете цвят на котката");
-                cat1.color = Console.ReadLine(); 
-                Console.WriteLine("Разполагате с {0} свободни места.", freespace); 
-                Console.Clear(); 
-                Console.WriteLine("Името на котката е: {0} , Тя е на {1} години  и е {2} на цвят ", cat1.name, cat1.age, cat1.color);
-            } while (freespace != 0); 
-            Console.WriteLine("Нямате налични места!!!");
+
+               if (FreeSpace==0)
+                {
+                    Catinfo[0] = "Info";
+                    Console.Clear();
+                    Console.WriteLine("Ето информация за вашите животни!!!");
+                }
+
+                 
+            }
+
+
+            for (int i = 0; i < AnimalClinic.Count; ++i)// обхождаме целия списък и го принтираме 
+            {
+                Console.WriteLine($"Списък на котките ");
+                Console.WriteLine($"Името на котката е: {AnimalClinic[i].name}." +
+                    $" Цвета на котката е : {AnimalClinic[i].color}. Възрастта и е : {AnimalClinic[i].age}. ");
+
+            }
+
+
+
 
 
         }
